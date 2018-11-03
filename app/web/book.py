@@ -1,8 +1,9 @@
 from flask import jsonify, request
-from helper import is_isbn_or_key
-from yushubook import Yushubook
+from app.libs.helper import is_isbn_or_key
+from app.spider.yushubook import Yushubook
 from . import web
 from app.form.book import SearchForm
+
 
 @web.route('/search/book')
 def search():
@@ -14,7 +15,7 @@ def search():
         if isbn_or_key == 'isbn':
             result = Yushubook.search_by_isbn(q)
         else:
-            result = Yushubook.search_by_key(q)
+            result = Yushubook.search_by_key(q, page)
         return jsonify(result)
     else:
         return jsonify(form.errors)
