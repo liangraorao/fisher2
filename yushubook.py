@@ -14,7 +14,7 @@ class Yushubook:
 
     @classmethod
     def search_by_key(cls, keyword, start=0, count=15):
-        key_url = cls.key_url.format(keyword, start, count)
+        key_url = cls.key_url.format(keyword, count, start)
         result = Http.get(key_url)
         return result
 
