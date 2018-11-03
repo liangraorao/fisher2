@@ -4,7 +4,7 @@ from httper import Http
 class Yushubook:
 
     isbn_url = 'http://t.yushu.im/v2/book/isbn/{}'
-    key_url = 'http://t.yushu.im/v2/book/search?q={}&start={}&count={}'
+    key_url = 'http://t.yushu.im/v2/book/search?q={}&count={}&start={}'
 
     @classmethod
     def search_by_isbn(cls, isbn):
