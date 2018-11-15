@@ -29,12 +29,12 @@ class BookViewModel:
     def __cut_book_data(cls, data):
         res = {
             "author": '、'.join(data['author']),
-            "binding": data['binding'],
-            "isbn": data['isbn'],
             "publisher": data['publisher'],
             "summary": data['summary'],
             "title": data['title'],
-            "price": data['price'] or ''
+            "price": data['price'],
+            "pages": data['pages'] or '',
+            "image": data['image']
         }
         return res
 
