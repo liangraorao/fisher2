@@ -6,7 +6,7 @@ from app.form.book import SearchForm
 from app.view_models.book import BookViewModel
 
 
-@web.route('/search/book')
+@web.route('/book/search')
 def search():
     form = SearchForm(request.args)
     if form.validate():
