@@ -11,3 +11,4 @@ if __name__ == '__main__':
 
 #http://127.0.0.1:5000/book/search?q=金庸
 #9787108006721
+#http://127.0.0.1:5000/static/test.jpg

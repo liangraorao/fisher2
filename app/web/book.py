@@ -1,10 +1,11 @@
-from flask import jsonify, request
+from flask import jsonify, request,render_template, flash
 from app.libs.helper import is_isbn_or_key
 from app.spider.yushubook import Yushubook
 from . import web
 from app.form.book import SearchForm
 from app.view_models.book import BookCollection
 import json
+
 
 @web.route('/book/search')
 def search():
@@ -28,3 +29,17 @@ def search():
         return json.dumps(books, default=(lambda o: o.__dict__))
     else:
         return jsonify(form.errors)
+
+
+@web.route('/test')
+def test():
+    r = {
+        'name': '',
+        'age': 16
+    }
+    r1= {
+
+    }
+    flash('flash消息闪现')
+    # return jsonify(r)
+    return render_template('test.html', data=r)

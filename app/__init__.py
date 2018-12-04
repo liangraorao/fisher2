@@ -1,6 +1,7 @@
 from flask import Flask
 from app.models.book import db
 
+
 def create_app():
     app = Flask(__name__)
     # 注意配置文件路径
@@ -10,6 +11,8 @@ def create_app():
 
     db.init_app(app)
     db.create_all(app=app)
+    # with app.app_context():
+    #     db.create_all()
     return app
 
 
