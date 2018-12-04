@@ -26,10 +26,12 @@ def search():
         books.fill(yushu_book, q)
         # 对象不可以被序列化
         # return jsonify(books)
-        return json.dumps(books, default=(lambda o: o.__dict__))
-    else:
-        return jsonify(form.errors)
+        # return json.dumps(books, default=(lambda o: o.__dict__))
 
+    else:
+        flash('不存在该书籍')
+        # return jsonify(form.errors)
+    return render_template('search_result.html', books=books)
 
 @web.route('/test')
 def test():
