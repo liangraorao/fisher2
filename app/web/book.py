@@ -3,7 +3,7 @@ from app.libs.helper import is_isbn_or_key
 from app.spider.yushubook import Yushubook
 from . import web
 from app.form.book import SearchForm
-from app.view_models.book import BookCollection
+from app.view_models.book import BookCollection, BookViewModel
 import json
 
 
@@ -29,9 +29,18 @@ def search():
         # return json.dumps(books, default=(lambda o: o.__dict__))
 
     else:
-        flash('不存在该书籍')
+        flash('搜索的关键字不符合要求，请重新输入')
         # return jsonify(form.errors)
     return render_template('search_result.html', books=books)
+
+
+@web.route('/book/<isbn>/detail')
+def book_detail(isbn):
+    yushu_book = Yushubook()
+    yushu_book.search_by_isbn(isbn)
+    book = BookViewModel(yushu_book.first)
+    return render_template('book_detail.html', book=book, wishes=[], gifts=[])
+
 
 @web.route('/test')
 def test():
