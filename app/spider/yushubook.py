@@ -1,5 +1,8 @@
+from app.models.base import db
 from app.libs.httper import Http
 from flask import current_app
+
+from app.models.book import Book
 
 
 class Yushubook:
@@ -13,6 +16,15 @@ class Yushubook:
     def search_by_isbn(self, isbn):
         isbn_url = self.isbn_url.format(isbn)
         result = Http.get(isbn_url)
+
+        # 从数据库查询是否有该书，如果没有，执行保存数据库，有的话跳过
+        book = Book()
+        res = Book.query.filter_by(isbn=result['isbn']).first()
+        if res is None:
+            book.set_attrs(result)
+            db.session.add(book)
+            db.session.commit()
+
         self.__fill_single(result)
 
     def search_by_key(self, keyword, page):
@@ -35,3 +47,4 @@ class Yushubook:
     @property
     def first(self):
         return self.books[0] if self.total >= 1 else None
+
